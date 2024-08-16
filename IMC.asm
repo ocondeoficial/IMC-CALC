@@ -15,12 +15,19 @@
 	frase7: .asciiz "obesidade grau 3"
 	frase8: .asciiz "Seu imc é: "
 	frase9: .asciiz "\n"
+	frase10: .asciiz "digite sua altura em centímetros (cm): "
+	frase11: .asciiz "digite seu peso em kilogramas (kg): "
 .text
+	li $v0, 4
+	la $a0, frase10
+	syscall
 	li $v0, 5
 	syscall
 	move $s0, $v0
-	add $s1, $s0, $zero
-	mul $t0, $s1, $v0
+	mul $t0, $s0, $v0
+	li $v0, 4
+	la $a0, frase11
+	syscall
 	li $v0, 5
 	syscall
 	move $t1, $v0
