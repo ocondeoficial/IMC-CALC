@@ -1,6 +1,6 @@
 .data
-	altura: .word 170
-	peso: .word 1050000
+	altura: .word 170 #altura em centímetros
+	peso: .word 1050000 #peso em kg x 10000
 	
 	peso1: .word 17
 	peso2: .word 19
