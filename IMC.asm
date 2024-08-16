@@ -1,7 +1,4 @@
 .data
-	altura: .word 170 #altura em centímetros
-	peso: .word 1050000 #peso em kg x 10000
-	
 	peso1: .word 17
 	peso2: .word 19
 	peso3: .word 25
@@ -16,11 +13,18 @@
 	frase5: .asciiz "obesidade grau 1"
 	frase6: .asciiz "obesidade grau 2"
 	frase7: .asciiz "obesidade grau 3"
+	frase8: .asciiz "Seu imc é: "
+	frase9: .asciiz "\n"
 .text
-	lw $s0, altura
-	lw $s1, altura
-	mul $t0, $s1, $s0
-	lw $t1, peso
+	li $v0, 5
+	syscall
+	move $s0, $v0
+	add $s1, $s0, $zero
+	mul $t0, $s1, $v0
+	li $v0, 5
+	syscall
+	move $t1, $v0
+	mulo $t1, $t1, 10000
 	div  $t1, $t0
 	mflo $a0
 	
@@ -31,6 +35,7 @@
 	lw $t4, peso5
 	lw $t5, peso6
 	
+	add $a1, $a0, $zero
 	blt $a0, $t0, muito_abaixo_peso
 	bgt $a0, $t0, proximo
 	
@@ -97,5 +102,16 @@ obesidade_grau3:
 	j saida
 	
 saida:
+	li $v0, 4
+	la $a0, frase9
+	syscall
+	li $v0, 4
+	la $a0, frase8
+	syscall
+	
+	move $a0, $a1
+	li $v0, 1
+	syscall
+	
 	li $v0, 10
 	syscall
